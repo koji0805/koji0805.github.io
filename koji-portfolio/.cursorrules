@@ -1,0 +1,250 @@
+# .cursorrules - ポートフォリオサイト AI駆動開発ガイド
+
+## 🎯 プロジェクト概要
+フリーランスエンジニアの案件獲得を目的とした、ハイクオリティなポートフォリオサイト。
+Cursor IDEによるAI駆動開発で効率的に実装を進める。
+
+## 📋 要件定義
+
+### 背景と目的
+- フリーランスエンジニアとして継続的な案件獲得が必要
+- 技術力と実績を効果的にアピールし、案件獲得率を向上させる
+- 見込み顧客に迅速かつ魅力的にポートフォリオを提示する
+
+### 必要機能
+1. **ポートフォリオ一覧表示**
+    - Python製アプリケーション（チャットツール、文字起こし、在庫管理）
+    - FastAPI + React製ダッシュボード
+    - Ruby on Rails製ECサイト
+    - カテゴリフィルター、キーワード検索機能
+
+2. **ポートフォリオ詳細表示**
+    - プロジェクト目的、担当範囲、工夫点
+    - 技術スタック、スクリーンショット
+    - GitHub/デモリンク
+
+3. **プロフィール表示**
+    - 自己紹介、スキルセット（Python, Ruby, JS, TS等）
+    - 職務経歴、資格
+    - SNSリンク（X、Qiita）
+
+4. **問い合わせ機能**
+    - メールフォーム（EmailJS → AWS SES）
+
+5. **技術スタック表示**（任意）
+    - サイト構築技術の明示
+
+## 🏗️ 基本設計
+
+### システム構成
+
+開発環境: Docker Compose
+├─ Next.js App (port:3000)
+├─ LocalStack (port:4566) ※AWS開発用
+└─ 本番: Vercel → AWS ECS/CloudFront
+
+### 技術スタック
+| 領域 | 技術 | 選定理由 |
+|------|------|----------|
+| Frontend | Next.js 14 + TypeScript | SSG対応、SEO最適化、React要件を満たす |
+| Styling | Tailwind CSS + Shadcn/ui | 高品質UI、開発速度 |
+| Animation | Framer Motion + CSS | 滑らかなインタラクション |
+| State | Zustand | 軽量で型安全な状態管理 |
+| Form | React Hook Form + Zod | バリデーション、型安全性 |
+| Container | Docker + Docker Compose | 環境統一、AWS移行容易 |
+| Mail | EmailJS → AWS SES | 段階的移行可能 |
+| Analytics | Google Analytics 4 | ユーザー行動分析 |
+
+### データモデル
+```typescript
+// ポートフォリオ
+interface Portfolio {
+    id: string
+    title: string
+    category: "python" | "web" | "rails"
+    description: string
+    objective: string         // プロジェクトの目的
+    role: string             // 担当範囲
+    highlights: string[]     // 工夫した点
+    technologies: string[]   // 使用技術
+    thumbnail: string        // サムネイル画像
+    images: string[]         // スクリーンショット
+    github_url?: string
+    demo_url?: string
+    created_at: string
+    featured: boolean        // 注目作品フラグ
+}
+
+// プロフィール
+interface Profile {
+    bio: string
+    avatar: string
+    skills: {
+        languages: Skill[]
+        frameworks: Skill[]
+        tools: Skill[]
+    }
+    experience: Experience[]
+    certifications: Certification[]
+    social_links: {
+        x: string
+        qiita: string
+        github?: string
+    }
+}
+
+interface Skill {
+    name: string
+    level: 1 | 2 | 3 | 4 | 5  // 習熟度
+    years: number
+}
+
+### ディレクトリ構成
+
+src/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx         # 共通レイアウト
+│   ├── page.tsx           # トップページ
+│   ├── portfolio/[id]/    # 詳細ページ（optional）
+│   └── api/               # API Routes
+├── components/
+│   ├── common/            # 共通コンポーネント
+│   ├── portfolio/         # ポートフォリオ関連
+│   ├── profile/           # プロフィール関連
+│   └── ui/                # Shadcn/ui
+├── hooks/                 # カスタムフック
+├── lib/                   # ユーティリティ
+├── styles/                # グローバルスタイル
+├── data/                  # 静的データ
+└── types/                 # 型定義
+
+### 画面構成・UX設計
+
+トップページ
+├─ ヒーローセクション
+│  ├─ キャッチコピー（アニメーション付き）
+│  ├─ プロフィール概要
+│  └─ CTA（問い合わせボタン）
+├─ ポートフォリオセクション
+│  ├─ フィルター/検索バー（sticky）
+│  ├─ カードグリッド（Intersection Observer）
+│  └─ 詳細モーダル
+├─ スキルセクション
+│  └─ インタラクティブチャート
+└─ フッター
+    └─ 技術スタック表示
+
+### Cursor実装ルール
+
+コード生成の基本原則
+
+1. **型安全性最優先 - unknown/anyは使用禁止**
+2. **早期リターン - ネストを避ける**
+3. **単一責任 - 1関数1機能**
+4. **DRY原則 - 共通化を意識**
+5. **命名規則**
+    - コンポーネント: PascalCase
+    - 関数/変数: camelCase
+    - 定数: UPPER_SNAKE_CASE
+    - 型/インターフェース: PascalCase
+
+### コンポーネント実装パターン
+
+// 必ずこのパターンで実装
+interface ComponentProps {
+  // props定義
+}
+
+export const ComponentName: React.FC<ComponentProps> = ({ prop1, prop2 }) => {
+  // hooks
+  // ロジック
+  // 早期リターン
+  // メインレンダリング
+}
+
+### スタイリング規則
+// Tailwind CSS優先、複雑な場合のみCSS Modules
+<div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 p-6 shadow-xl transition-all hover:scale-105">
+  {/* グラデーション、シャドウ、アニメーション必須 */}
+</div>
+
+### エラーハンドリング
+
+// 全API呼び出しでエラーハンドリング必須
+try {
+    const result = await apiCall()
+    if (!result.ok) {
+        throw new Error(`API Error: ${result.status}`)
+    }
+    return result.data
+} catch (error) {
+    console.error('詳細なエラー情報:', error)
+    // ユーザーフレンドリーなエラー表示
+    toast.error('エラーが発生しました。後でもう一度お試しください。')
+    return null
+}
+
+### 実装フェーズ
+
+Phase 1: MVP（1週間）
+
+- 基本レイアウト
+- ポートフォリオ一覧（静的データ）
+- レスポンシブ対応
+- 基本的なアニメーション
+
+Phase 2: 機能拡充（1週間）
+
+- 詳細モーダル
+- フィルター/検索
+- プロフィールセクション
+- 問い合わせフォーム
+
+Phase 3: 品質向上（1週間）
+
+- 高度なアニメーション
+- パフォーマンス最適化
+- SEO対策
+- アクセシビリティ改善
+
+Phase 4: 本番準備（3日）
+
+- Docker環境整備
+- CI/CD設定
+- 監視設定
+- ドキュメント整備
+
+### コミット規約
+
+feat: 新機能追加
+fix: バグ修正
+docs: ドキュメント更新
+style: コードスタイル修正
+refactor: リファクタリング
+test: テスト追加/修正
+chore: ビルド/補助ツール変更
+
+### 注意事項
+
+1. ビジネスロジックとUIを分離
+2. console.logは開発環境のみ
+3. 機密情報は環境変数
+4. コメントは「なぜ」を説明
+5. マジックナンバー禁止
+
+### デザイン差別化要素
+
+- グラデーション多用（ブランドカラー統一）
+- マイクロインタラクション（ホバー、クリック）
+- スクロールアニメーション（Framer Motion）
+- グラスモーフィズム効果
+- ダークモード対応（システム連動）
+- カスタムカーソル（デスクトップ）
+- パフォーマンスメーター表示
+
+### 成功指標
+- Lighthouse Score: 95+
+- 初回表示: 1.5秒以内
+- インタラクティブ: 3秒以内
+- エラー率: 0.1%以下
+- 問い合わせ転換率: 5%以上
