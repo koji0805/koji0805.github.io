@@ -26,7 +26,7 @@ export function Hero() {
           index++
         } else {
           clearInterval(nameTyping)
-          // サブタイトルの表示開始
+          // サブタイトルのタイピング開始
           setTimeout(() => {
             setSubtitleVisible(true)
             let subIndex = 0
@@ -38,7 +38,7 @@ export function Hero() {
                 clearInterval(subtitleTyping)
               }
             }, 50)
-          }, 300)
+          }, 500)
         }
       }, 100)
     }, 1000)
@@ -52,29 +52,28 @@ export function Hero() {
   return (
     <>
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
-        <nav className="max-w-6xl mx-auto px-6 py-6">
-          <div className="flex justify-center">
+      <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+        <nav className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-center">
             <div className="flex items-center space-x-12">
               <a href="#profile" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">PROFILE</a>
               <a href="#skill" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">SKILL</a>
               <a href="#portfolio" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">PORTFOLIO</a>
-              <a href="#certification" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">CERTIFICATION</a>
-              <a href="#work" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">WORK</a>
               <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">CONTACT</a>
             </div>
           </div>
         </nav>
       </header>
 
-      {/* Hero Section - Animated Text */}
-      <section className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
+      {/* Hero Section with Gradient Background */}
+      <section className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-50 flex items-center justify-center relative overflow-hidden">
+        {/* Main Content */}
+        <div className="text-center relative z-10">
           <h1 className={`text-4xl lg:text-5xl font-bold mb-4 text-gray-900 transition-all duration-1000 ${
             nameVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             {nameText}
-            <span className="animate-pulse">|</span>
+            <span className="animate-pulse text-blue-600">|</span>
           </h1>
           
           <p className={`text-lg lg:text-xl font-light tracking-wide text-gray-600 transition-all duration-1000 ${
@@ -82,7 +81,7 @@ export function Hero() {
           }`}>
             {subtitleText}
             {subtitleVisible && subtitleText.length < fullSubtitle.length && (
-              <span className="animate-pulse">|</span>
+              <span className="animate-pulse text-blue-600">|</span>
             )}
           </p>
         </div>

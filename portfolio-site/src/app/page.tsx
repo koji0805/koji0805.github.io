@@ -1,8 +1,7 @@
 import { Hero } from '../components/Hero'
 import { Profile } from '../components/Profile'
 import { Skill } from '../components/Skill'
-import { WorksGrid } from '../components/WorksGrid'
-import { About } from '../components/About'
+import { PortfolioGrid } from '../components/PortfolioGrid'
 import { Contact } from '../components/Contact'
 
 export default function Home() {
@@ -11,8 +10,7 @@ export default function Home() {
       <Hero />
       <Profile />
       <Skill />
-      <WorksGrid />
-      <About />
+      <PortfolioGrid />
       <Contact />
     </main>
   )
