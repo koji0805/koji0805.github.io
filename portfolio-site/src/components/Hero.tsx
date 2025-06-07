@@ -65,11 +65,107 @@ export function Hero() {
         </nav>
       </header>
 
-      {/* Hero Section with Gradient Background */}
-      <section className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-50 flex items-center justify-center relative overflow-hidden">
+      {/* Hero Section with Dynamic Background */}
+      <section className="min-h-screen bg-white flex items-center justify-center relative overflow-hidden">
+        {/* Dynamic Background - Continuously Moving Squares and Triangles */}
+        <div className="absolute inset-0">
+          {/* Floating Squares with continuous movement */}
+          <div className="absolute top-20 right-20 w-16 h-16 border-2 border-blue-300 rotate-45 animate-spin opacity-30" style={{animationDuration: '8s'}}></div>
+          <div className="absolute top-1/3 left-20 w-12 h-12 border-2 border-purple-300 animate-pulse opacity-40" style={{animationDuration: '1.5s'}}></div>
+          <div className="absolute bottom-1/4 right-1/3 w-20 h-20 border border-gray-300 rotate-45 animate-bounce opacity-20" style={{animationDuration: '2s'}}></div>
+          <div className="absolute top-1/2 right-10 w-8 h-8 bg-blue-100 rotate-45 animate-pulse opacity-50" style={{animationDuration: '1s'}}></div>
+          <div className="absolute bottom-1/3 left-1/4 w-14 h-14 border-2 border-pink-300 animate-spin opacity-30" style={{animationDuration: '6s'}}></div>
+          <div className="absolute top-3/4 left-10 w-10 h-10 bg-purple-100 rotate-12 animate-bounce opacity-40" style={{animationDuration: '1.8s'}}></div>
+          
+          {/* Fast Moving Squares */}
+          <div className="absolute top-10 left-1/2 w-6 h-6 border border-blue-200 rotate-45 animate-pulse opacity-30" style={{animationDuration: '1.2s'}}></div>
+          <div className="absolute bottom-10 left-1/3 w-18 h-18 border-2 border-purple-200 animate-spin opacity-25" style={{animationDuration: '4s'}}></div>
+          <div className="absolute top-2/3 right-1/4 w-8 h-8 bg-pink-50 rotate-12 animate-bounce opacity-40" style={{animationDuration: '1.6s'}}></div>
+          
+          {/* Floating Triangles with faster animations */}
+          <div 
+            className="absolute top-1/4 left-1/3 w-0 h-0 animate-pulse opacity-30"
+            style={{
+              borderLeft: '15px solid transparent',
+              borderRight: '15px solid transparent',
+              borderBottom: '26px solid #93c5fd',
+              animationDuration: '1.3s'
+            }}
+          ></div>
+          <div 
+            className="absolute bottom-20 right-1/4 w-0 h-0 animate-bounce opacity-40"
+            style={{
+              borderLeft: '12px solid transparent',
+              borderRight: '12px solid transparent',
+              borderTop: '20px solid #c4b5fd',
+              animationDuration: '1.7s'
+            }}
+          ></div>
+          <div 
+            className="absolute top-1/2 left-1/2 w-0 h-0 animate-spin opacity-20"
+            style={{
+              borderTop: '10px solid transparent',
+              borderBottom: '10px solid transparent',
+              borderLeft: '17px solid #fda4af',
+              animationDuration: '5s',
+              transform: 'translateX(-50%) translateY(-50%)'
+            }}
+          ></div>
+          <div 
+            className="absolute top-3/4 right-1/2 w-0 h-0 animate-pulse opacity-35"
+            style={{
+              borderLeft: '18px solid transparent',
+              borderRight: '18px solid transparent',
+              borderBottom: '31px solid #d1d5db',
+              animationDuration: '2s'
+            }}
+          ></div>
+          <div 
+            className="absolute bottom-1/2 left-1/5 w-0 h-0 animate-bounce opacity-25"
+            style={{
+              borderTop: '14px solid transparent',
+              borderBottom: '14px solid transparent',
+              borderRight: '24px solid #bfdbfe',
+              animationDuration: '2.2s'
+            }}
+          ></div>
+          
+          {/* Additional small moving elements */}
+          {Array.from({length: 8}).map((_, i) => (
+            <div
+              key={`square-${i}`}
+              className="absolute w-4 h-4 border border-gray-200 rotate-45 animate-pulse"
+              style={{
+                left: `${10 + (i * 12)}%`,
+                top: `${20 + (i * 8)}%`,
+                animationDelay: `${i * 0.3}s`,
+                animationDuration: `${1 + (i % 3)}s`,
+                opacity: 0.2
+              }}
+            ></div>
+          ))}
+          
+          {Array.from({length: 6}).map((_, i) => (
+            <div
+              key={`triangle-${i}`}
+              className="absolute w-0 h-0 animate-bounce"
+              style={{
+                left: `${70 + (i * 5)}%`,
+                top: `${15 + (i * 12)}%`,
+                borderLeft: '6px solid transparent',
+                borderRight: '6px solid transparent',
+                borderBottom: '10px solid #e5e7eb',
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: `${1.5 + (i % 2)}s`,
+                opacity: 0.3
+              }}
+            ></div>
+          ))}
+        </div>
+        
         {/* Main Content */}
         <div className="text-center relative z-10">
-          <h1 className={`text-4xl lg:text-5xl font-bold mb-4 text-gray-900 transition-all duration-1000 ${
+          <h1 className={`text-4xl lg:text-6xl font-bold mb-4 text-gray-900 transition-all duration-1000 ${
             nameVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             {nameText}
