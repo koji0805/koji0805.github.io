@@ -1,250 +1,160 @@
-# .cursorrules - ポートフォリオサイト AI駆動開発ガイド
+# AI実装指示書
 
-## 🎯 プロジェクト概要
-フリーランスエンジニアの案件獲得を目的とした、ハイクオリティなポートフォリオサイト。
-Cursor IDEによるAI駆動開発で効率的に実装を進める。
+## プロジェクト概要
+フリーランスエンジニアの案件獲得用ポートフォリオサイト
 
-## 📋 要件定義
+### 目的
+- 技術力と実績を効果的にアピール
+- 見込み顧客への迅速なポートフォリオ提示
+- 継続的な案件獲得の実現
 
-### 背景と目的
-- フリーランスエンジニアとして継続的な案件獲得が必要
-- 技術力と実績を効果的にアピールし、案件獲得率を向上させる
-- 見込み顧客に迅速かつ魅力的にポートフォリオを提示する
+## 要件定義
 
 ### 必要機能
-1. **ポートフォリオ一覧表示**
-    - Python製アプリケーション（チャットツール、文字起こし、在庫管理）
-    - FastAPI + React製ダッシュボード
-    - Ruby on Rails製ECサイト
-    - カテゴリフィルター、キーワード検索機能
+1. **ポートフォリオ一覧**
+   - Python製アプリ（チャットツール、文字起こし、在庫管理）
+   - FastAPI + React製ダッシュボード  
+   - Ruby on Rails製ECサイト
+   - カテゴリーフィルター機能
 
-2. **ポートフォリオ詳細表示**
-    - プロジェクト目的、担当範囲、工夫点
-    - 技術スタック、スクリーンショット
-    - GitHub/デモリンク
+2. **ポートフォリオ詳細**
+   - プロジェクト概要、担当範囲
+   - 使用技術、スクリーンショット
+   - GitHub/デモリンク
 
-3. **プロフィール表示**
-    - 自己紹介、スキルセット（Python, Ruby, JS, TS等）
-    - 職務経歴、資格
-    - SNSリンク（X、Qiita）
+3. **プロフィール**
+   - 自己紹介、スキルセット（Python, Ruby, JS, TS等）
+   - 職務経歴、資格
+   - SNSリンク（X、Qiita）
 
-4. **問い合わせ機能**
-    - メールフォーム（EmailJS → AWS SES）
+4. **問い合わせフォーム**
+   - 名前、メール、内容
+   - 送信確認画面
 
-5. **技術スタック表示**（任意）
-    - サイト構築技術の明示
-
-## 🏗️ 基本設計
-
-### システム構成
-
-開発環境: Docker Compose
-├─ Next.js App (port:3000)
-├─ LocalStack (port:4566) ※AWS開発用
-└─ 本番: Vercel → AWS ECS/CloudFront
+## 基本設計
 
 ### 技術スタック
-| 領域 | 技術 | 選定理由 |
-|------|------|----------|
-| Frontend | Next.js 14 + TypeScript | SSG対応、SEO最適化、React要件を満たす |
-| Styling | Tailwind CSS + Shadcn/ui | 高品質UI、開発速度 |
-| Animation | Framer Motion + CSS | 滑らかなインタラクション |
-| State | Zustand | 軽量で型安全な状態管理 |
-| Form | React Hook Form + Zod | バリデーション、型安全性 |
-| Container | Docker + Docker Compose | 環境統一、AWS移行容易 |
-| Mail | EmailJS → AWS SES | 段階的移行可能 |
-| Analytics | Google Analytics 4 | ユーザー行動分析 |
+- Next.js 14 + TypeScript（SSG対応）
+- Tailwind CSS（スタイリング）
+- React Hook Form（フォーム）
+- Vercel（ホスティング）
 
 ### データモデル
 ```typescript
-// ポートフォリオ
 interface Portfolio {
-    id: string
-    title: string
-    category: "python" | "web" | "rails"
-    description: string
-    objective: string         // プロジェクトの目的
-    role: string             // 担当範囲
-    highlights: string[]     // 工夫した点
-    technologies: string[]   // 使用技術
-    thumbnail: string        // サムネイル画像
-    images: string[]         // スクリーンショット
-    github_url?: string
-    demo_url?: string
-    created_at: string
-    featured: boolean        // 注目作品フラグ
+  id: string
+  title: string
+  category: "python" | "web" | "rails"
+  description: string
+  role: string              // 担当範囲
+  technologies: string[]
+  thumbnail: string
+  images: string[]
+  github_url?: string
+  demo_url?: string
+  featured?: boolean        // 注目作品
 }
 
-// プロフィール
 interface Profile {
-    bio: string
-    avatar: string
-    skills: {
-        languages: Skill[]
-        frameworks: Skill[]
-        tools: Skill[]
-    }
-    experience: Experience[]
-    certifications: Certification[]
-    social_links: {
-        x: string
-        qiita: string
-        github?: string
-    }
+  bio: string
+  skills: {
+    category: string
+    items: string[]
+  }[]
+  experience: string[]
+  social: {
+    x?: string
+    qiita?: string
+    github?: string
+  }
 }
+```
 
-interface Skill {
-    name: string
-    level: 1 | 2 | 3 | 4 | 5  // 習熟度
-    years: number
-}
+### 画面構成
+```
+トップページ（1ページ完結）
+├─ ヒーローセクション
+│  ├─ キャッチコピー
+│  └─ 簡潔な自己紹介
+├─ ポートフォリオセクション
+│  ├─ カテゴリータブ
+│  └─ カードグリッド
+├─ プロフィールセクション
+│  ├─ 詳細な自己紹介
+│  └─ スキル一覧
+└─ 問い合わせセクション
+```
 
 ### ディレクトリ構成
-
+```
 src/
-├── app/                    # Next.js App Router
-│   ├── layout.tsx         # 共通レイアウト
-│   ├── page.tsx           # トップページ
-│   ├── portfolio/[id]/    # 詳細ページ（optional）
-│   └── api/               # API Routes
+├── app/
+│   ├── page.tsx          // メインページ
+│   ├── layout.tsx
+│   └── globals.css
 ├── components/
-│   ├── common/            # 共通コンポーネント
-│   ├── portfolio/         # ポートフォリオ関連
-│   ├── profile/           # プロフィール関連
-│   └── ui/                # Shadcn/ui
-├── hooks/                 # カスタムフック
-├── lib/                   # ユーティリティ
-├── styles/                # グローバルスタイル
-├── data/                  # 静的データ
-└── types/                 # 型定義
+│   ├── Hero.tsx          // ヒーローセクション
+│   ├── PortfolioGrid.tsx // ポートフォリオ一覧
+│   ├── PortfolioCard.tsx // 個別カード
+│   ├── Profile.tsx       // プロフィール
+│   └── ContactForm.tsx   // 問い合わせ
+├── data/
+│   ├── portfolios.ts     // 作品データ
+│   └── profile.ts        // プロフィールデータ
+└── types/
+    └── index.ts          // 型定義
+```
 
-### 画面構成・UX設計
+## コード生成ルール
 
-トップページ
-├─ ヒーローセクション
-│  ├─ キャッチコピー（アニメーション付き）
-│  ├─ プロフィール概要
-│  └─ CTA（問い合わせボタン）
-├─ ポートフォリオセクション
-│  ├─ フィルター/検索バー（sticky）
-│  ├─ カードグリッド（Intersection Observer）
-│  └─ 詳細モーダル
-├─ スキルセクション
-│  └─ インタラクティブチャート
-└─ フッター
-    └─ 技術スタック表示
+### 基本原則
+- **シンプル最優先** - 動くコードを最速で
+- **コード量最小** - 1ファイル100行以内目標
+- **型安全** - anyは使用禁止
+- **早期リターン** - ネスト2段階まで
 
-### Cursor実装ルール
-
-コード生成の基本原則
-
-1. **型安全性最優先 - unknown/anyは使用禁止**
-2. **早期リターン - ネストを避ける**
-3. **単一責任 - 1関数1機能**
-4. **DRY原則 - 共通化を意識**
-5. **命名規則**
-    - コンポーネント: PascalCase
-    - 関数/変数: camelCase
-    - 定数: UPPER_SNAKE_CASE
-    - 型/インターフェース: PascalCase
-
-### コンポーネント実装パターン
-
-// 必ずこのパターンで実装
-interface ComponentProps {
-  // props定義
+### 実装パターン
+```tsx
+// コンポーネント
+export function ComponentName({ data }: { data: Portfolio }) {
+  if (!data) return null
+  
+  return (
+    <div className="rounded-lg bg-white p-6 shadow hover:shadow-lg transition-shadow">
+      {/* シンプルな実装 */}
+    </div>
+  )
 }
 
-export const ComponentName: React.FC<ComponentProps> = ({ prop1, prop2 }) => {
-  // hooks
-  // ロジック
-  // 早期リターン
-  // メインレンダリング
-}
+// データ取得（エラーは最小限）
+const data = await fetch(url).catch(() => null)
+```
 
-### スタイリング規則
-// Tailwind CSS優先、複雑な場合のみCSS Modules
-<div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 p-6 shadow-xl transition-all hover:scale-105">
-  {/* グラデーション、シャドウ、アニメーション必須 */}
-</div>
+### スタイリング指針
+- 白背景ベース + アクセントカラー（青系）
+- 十分な余白（p-6, gap-6 など）
+- ホバーエフェクト必須
+- レスポンシブ対応（grid-cols-1 md:grid-cols-2 lg:grid-cols-3）
 
-### エラーハンドリング
+### 実装順序
+1. 型定義（types/index.ts）
+2. サンプルデータ（data/）
+3. 各セクションコンポーネント
+4. メインページ統合（app/page.tsx）
 
-// 全API呼び出しでエラーハンドリング必須
-try {
-    const result = await apiCall()
-    if (!result.ok) {
-        throw new Error(`API Error: ${result.status}`)
-    }
-    return result.data
-} catch (error) {
-    console.error('詳細なエラー情報:', error)
-    // ユーザーフレンドリーなエラー表示
-    toast.error('エラーが発生しました。後でもう一度お試しください。')
-    return null
-}
+### 品質基準
+- TypeScriptエラー: 0
+- Lighthouse Score: 90+
+- 総行数: 1000行以内
+- レスポンシブ対応: 必須
 
-### 実装フェーズ
+## AIへの指示対応例
 
-Phase 1: MVP（1週間）
+「もっと機能を追加して」
+→ 「基本機能を先に完成させ、動作確認後に追加しましょう」
 
-- 基本レイアウト
-- ポートフォリオ一覧（静的データ）
-- レスポンシブ対応
-- 基本的なアニメーション
+「エラーハンドリングを詳しく」
+→ 「必要最小限のcatchのみ実装します」
 
-Phase 2: 機能拡充（1週間）
-
-- 詳細モーダル
-- フィルター/検索
-- プロフィールセクション
-- 問い合わせフォーム
-
-Phase 3: 品質向上（1週間）
-
-- 高度なアニメーション
-- パフォーマンス最適化
-- SEO対策
-- アクセシビリティ改善
-
-Phase 4: 本番準備（3日）
-
-- Docker環境整備
-- CI/CD設定
-- 監視設定
-- ドキュメント整備
-
-### コミット規約
-
-feat: 新機能追加
-fix: バグ修正
-docs: ドキュメント更新
-style: コードスタイル修正
-refactor: リファクタリング
-test: テスト追加/修正
-chore: ビルド/補助ツール変更
-
-### 注意事項
-
-1. ビジネスロジックとUIを分離
-2. console.logは開発環境のみ
-3. 機密情報は環境変数
-4. コメントは「なぜ」を説明
-5. マジックナンバー禁止
-
-### デザイン差別化要素
-
-- グラデーション多用（ブランドカラー統一）
-- マイクロインタラクション（ホバー、クリック）
-- スクロールアニメーション（Framer Motion）
-- グラスモーフィズム効果
-- ダークモード対応（システム連動）
-- カスタムカーソル（デスクトップ）
-- パフォーマンスメーター表示
-
-### 成功指標
-- Lighthouse Score: 95+
-- 初回表示: 1.5秒以内
-- インタラクティブ: 3秒以内
-- エラー率: 0.1%以下
-- 問い合わせ転換率: 5%以上
+「アニメーションを派手に」
+→ 「パフォーマンスを考慮し、CSS transitionのみ使用します」

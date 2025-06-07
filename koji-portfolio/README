@@ -1,40 +1,90 @@
 # ポートフォリオサイト
 
-## 🤖 AI駆動開発
+フリーランスエンジニアの実績を魅力的に伝える、モダンなポートフォリオサイト
 
-本プロジェクトはCursor IDEを活用したAI駆動開発で進めています。
+## ✨ 特徴
 
-- **開発環境**: Cursor IDE
-- **設計書**: .cursorrules に基本設計を記載
-- **開発方針**: AIとの対話により効率的に実装
+- 📱 **レスポンシブデザイン** - スマホからPCまで美しく表示
+- 🚀 **高速表示** - Next.jsのSSGで爆速パフォーマンス
+- 🎨 **モダンUI** - Tailwind CSSによる洗練されたデザイン
+- 📧 **問い合わせフォーム** - 案件の相談を簡単に受付
 
-## 📋 要件定義
+## 🖼️ デモ
 
-### 背景
-フリーランスエンジニアとして活動しており、継続的な案件獲得のためには、自身のスキルや過去の実績を効果的にアピールする手段が必要である。
+[デモサイトを見る](https://your-portfolio.vercel.app) ※デプロイ後に更新
 
-### 必要な機能
-1. **ポートフォリオ一覧表示**
-    - Python製アプリ（チャットツール、文字起こし、在庫管理）
-    - FastAPI + React製ダッシュボード
-    - Ruby on Rails製ECサイト
+## 💻 掲載作品
 
-2. **ポートフォリオ詳細表示**
-    - プロジェクト詳細、スクリーンショット、技術スタック
-
-3. **プロフィール表示**
-    - スキルセット、経歴、SNSリンク（X、Qiita）
-
-4. **問い合わせ機能**
-    - メールフォーム
-
-5. **レスポンシブデザイン対応**
+- **Pythonアプリケーション**
+  - AIチャットツール
+  - 音声文字起こしシステム
+  - 在庫管理システム
+  
+- **Webアプリケーション**
+  - FastAPI + Reactダッシュボード
+  - Ruby on Rails ECサイト
 
 ## 🚀 セットアップ
 
 ```bash
-# Docker環境の起動
-docker-compose up -d
+# リポジトリをクローン
+git clone https://github.com/yourusername/portfolio-site.git
+cd portfolio-site
 
-# 開発サーバーの起動
+# 依存関係をインストール
+npm install
+
+# 開発サーバーを起動
 npm run dev
+```
+
+http://localhost:3000 でサイトが開きます
+
+## 📝 カスタマイズ
+
+### ポートフォリオの追加
+`src/data/portfolios.ts` を編集：
+
+```typescript
+{
+  id: "new-project",
+  title: "新しいプロジェクト",
+  category: "python",
+  description: "プロジェクトの説明",
+  technologies: ["Python", "FastAPI"],
+  thumbnail: "/images/new-project.jpg"
+}
+```
+
+### プロフィールの更新
+`src/data/profile.ts` を編集して、自己紹介やスキルを更新
+
+## 🛠️ 技術スタック
+
+- **フレームワーク**: Next.js 14 (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS
+- **フォーム**: React Hook Form
+- **ホスティング**: Vercel
+
+## 📦 デプロイ
+
+```bash
+# Vercel CLIでデプロイ
+vercel
+
+# または GitHub連携で自動デプロイ
+```
+
+## 🤖 開発について
+
+本プロジェクトはCursor IDEを使用したAI駆動開発で構築。
+実装の詳細は `.cursorrules` を参照してください。
+
+## 📄 ライセンス
+
+MIT
+
+---
+
+お問い合わせ: your-email@example.com
