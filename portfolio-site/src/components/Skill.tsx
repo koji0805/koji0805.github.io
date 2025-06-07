@@ -47,12 +47,12 @@ export function Skill() {
       category: 'Frontend',
       items: [
         { name: 'HTML5', icon: '/images/skills/html5.svg', rating: 5 },
-        { name: 'CSS3', icon: '/images/skills/css3.svg', rating: 4 },
+        { name: 'CSS', icon: '/images/skills/css.svg', rating: 4 },
         { name: 'JavaScript', icon: '/images/skills/javascript.svg', rating: 4 },
         { name: 'TypeScript', icon: '/images/skills/typescript.svg', rating: 4 },
         { name: 'React', icon: '/images/skills/react.svg', rating: 4 },
-        { name: 'Next.js', icon: '/images/skills/nextjs.svg', rating: 4 },
-        { name: 'Vue.js', icon: '/images/skills/vuejs.svg', rating: 3 }
+        { name: 'Next.js', icon: '/images/skills/nextdotjs.svg', rating: 4 },
+        { name: 'Vue.js', icon: '/images/skills/vuedotjs.svg', rating: 3 }
       ]
     },
     {
@@ -62,8 +62,8 @@ export function Skill() {
         { name: 'FastAPI', icon: '/images/skills/fastapi.svg', rating: 4 },
         { name: 'Django', icon: '/images/skills/django.svg', rating: 4 },
         { name: 'Ruby', icon: '/images/skills/ruby.svg', rating: 4 },
-        { name: 'Ruby on Rails', icon: '/images/skills/rails.svg', rating: 3 },
-        { name: 'Node.js', icon: '/images/skills/nodejs.svg', rating: 3 },
+        { name: 'Ruby on Rails', icon: '/images/skills/rubyonrails.svg', rating: 3 },
+        { name: 'Node.js', icon: '/images/skills/nodedotjs.svg', rating: 3 },
         { name: 'Go', icon: '/images/skills/go.svg', rating: 3 }
       ]
     },
@@ -72,19 +72,18 @@ export function Skill() {
       items: [
         { name: 'PostgreSQL', icon: '/images/skills/postgresql.svg', rating: 4 },
         { name: 'MySQL', icon: '/images/skills/mysql.svg', rating: 4 },
+        { name: 'sqlite', icon: '/images/skills/sqlite.svg', rating: 4 },
         { name: 'MongoDB', icon: '/images/skills/mongodb.svg', rating: 3 },
-        { name: 'Redis', icon: '/images/skills/redis.svg', rating: 3 }
       ]
     },
     {
       category: 'Tools & Others',
       items: [
         { name: 'Docker', icon: '/images/skills/docker.svg', rating: 4 },
-        { name: 'AWS', icon: '/images/skills/aws.svg', rating: 4 },
         { name: 'Git', icon: '/images/skills/git.svg', rating: 5 },
         { name: 'GitHub', icon: '/images/skills/github.svg', rating: 5 },
-        { name: 'Vercel', icon: '/images/skills/vercel.svg', rating: 3 },
-        { name: 'VS Code', icon: '/images/skills/vscode.svg', rating: 5 }
+        { name: 'GitHub Copilot', icon: '/images/skills/githubcopilot.svg', rating: 4 },
+        { name: 'GitLab', icon: '/images/skills/gitlab.svg', rating: 3 },
       ]
     }
   ]
