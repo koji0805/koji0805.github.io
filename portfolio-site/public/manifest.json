@@ -1,0 +1,16 @@
+{
+  "name": "Koji Fujiwara Portfolio",
+  "short_name": "KF Portfolio",
+  "description": "フリーランスエンジニア 藤原浩司のポートフォリオサイト",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/portfolio_favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
