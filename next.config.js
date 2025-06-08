@@ -10,6 +10,6 @@ module.exports = {
   images: {
     unoptimized: true, // GitHub Pagesでは画像最適化を無効化
   },
-  assetPrefix: isProd ? '/portfolio-site/' : '', // リポジトリ名を指定
-  basePath: isProd ? '/portfolio-site' : '', // ベースパスを設定
+  assetPrefix: isProd ? '/koji0805.github.io/' : '', // リポジトリ名を正しく指定
+  basePath: isProd ? '/koji0805.github.io' : '', // ベースパスを設定
 }
