@@ -1,9 +1,11 @@
+/** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
+  output: 'export',           // 静的サイトとして出力
+  trailingSlash: true,        // URLの末尾にスラッシュを追加
+  skipTrailingSlashRedirect: true,
+  distDir: 'out',            // 出力ディレクトリを指定
   images: {
-    domains: ['your-image-domain.com'], // 画像のドメインを指定
+    unoptimized: true,       // GitHub Pagesでは画像最適化を無効化
   },
-  experimental: {
-    appDir: true, // App Routerを有効にする
-  },
-};
+}
