@@ -1,5 +1,5 @@
-# .gitignoreファイルを作成
-cat << 'EOF' > .gitignore
+# 現在の.gitignoreファイルを正しい内容で上書き
+cat > .gitignore << 'EOF'
 # Dependencies
 node_modules/
 npm-debug.log*
