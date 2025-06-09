@@ -38,7 +38,7 @@ export function Profile() {
           {/* Left: Profile Image */}
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
             <div className="relative">
-              <div className="w-full h-[500px] bg-gray-100 overflow-hidden">
+              <div className="w-full h-[460px] bg-gray-100 overflow-hidden">
                 <Image
                   src="/images/kojipthoto.jpeg"
                   alt="Koji Fujiwara Profile"
@@ -67,15 +67,15 @@ export function Profile() {
               
               <div className="space-y-4">
                 <div className="border-l-2 border-blue-600 pl-4">
-                  <div className="text-sm text-gray-500 mb-1">2021 - Present</div>
+                  <div className="text-sm text-gray-500 mb-1">2020 - Present</div>
                   <div className="font-medium text-gray-900">フリーランスエンジニア</div>
-                  <div className="text-sm text-gray-600">AI・Web開発を中心とした技術コンサルティング</div>
+                  <div className="text-sm text-gray-600">AI・Web開発を中心とした開発</div>
                 </div>
                 
                 <div className="border-l-2 border-gray-300 pl-4">
-                  <div className="text-sm text-gray-500 mb-1">2008 - 2021</div>
-                  <div className="font-medium text-gray-900">大手アミューズメント企業</div>
-                  <div className="text-sm text-gray-600">IT促進・経営企画・購買部門マネージャー</div>
+                  <div className="text-sm text-gray-500 mb-1">2008 - 2020</div>
+                  <div className="font-medium text-gray-900">株式会社マルハン</div>
+                  <div className="text-sm text-gray-600">マーケティング・経営企画・DX部門</div>
                 </div>
               </div>
             </div>
