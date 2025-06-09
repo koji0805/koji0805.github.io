@@ -12,13 +12,18 @@ export function Hero() {
   const fullSubtitle = 'ENGINEER PORTFOLIO.'
 
   useEffect(() => {
+    // デバッグ用ログを追加
+    console.log('Hero component mounted')
+    
     // 最初のフェードイン
     const timer1 = setTimeout(() => {
+      console.log('Name fade-in started')
       setNameVisible(true)
     }, 500)
 
     // 名前のタイピングエフェクト
     const timer2 = setTimeout(() => {
+      console.log('Name typing started')
       let index = 0
       const nameTyping = setInterval(() => {
         if (index <= fullName.length) {
@@ -44,6 +49,7 @@ export function Hero() {
     }, 1000)
 
     return () => {
+      console.log('Hero component cleanup')
       clearTimeout(timer1)
       clearTimeout(timer2)
     }

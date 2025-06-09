@@ -85,7 +85,7 @@ export function Profile() {
               <div className="space-y-2 text-sm">
                 <div className="flex">
                   <span className="text-gray-500 w-20">Location:</span>
-                  <span className="text-gray-700">Tokyo, Japan</span>
+                  <span className="text-gray-700">Osaka, Japan</span>
                 </div>
                 <div className="flex">
                   <span className="text-gray-500 w-20">Focus:</span>
