@@ -52,7 +52,7 @@ export function Profile() {
           {/* Right: Profile Info */}
           <div className={`space-y-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
             <div>
-              <h3 className="text-2xl font-medium text-gray-900 mb-6">KOJI FUJIWARA</h3>
+              <h3 className="text-2xl font-medium text-gray-900 mb-6">藤原 浩司</h3>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p className="font-light">
                   Python・JavaScript・Rubyを使用したWebアプリケーション開発を専門とするフリーランスエンジニア。
@@ -63,37 +63,37 @@ export function Profile() {
 
             {/* Career Summary */}
             <div className="space-y-6">
-              <h4 className="text-lg font-medium text-gray-900">Career Summary</h4>
+              <h4 className="text-lg font-medium text-gray-900">経歴</h4>
               
               <div className="space-y-4">
                 <div className="border-l-2 border-blue-600 pl-4">
-                  <div className="text-sm text-gray-500 mb-1">2020 - Present</div>
+                  <div className="text-sm text-gray-500 mb-1">2020年 - 現在</div>
                   <div className="font-medium text-gray-900">フリーランスエンジニア</div>
-                  <div className="text-sm text-gray-600">AI・Web開発を中心とした開発</div>
+                  <div className="text-sm text-gray-600">AI・Web開発を中心とした開発業務</div>
                 </div>
                 
                 <div className="border-l-2 border-gray-300 pl-4">
-                  <div className="text-sm text-gray-500 mb-1">2008 - 2020</div>
+                  <div className="text-sm text-gray-500 mb-1">2008年 - 2020年</div>
                   <div className="font-medium text-gray-900">株式会社マルハン</div>
-                  <div className="text-sm text-gray-600">マーケティング・経営企画・DX部門</div>
+                  <div className="text-sm text-gray-600">本社マーケティング・経営企画・DX部門を歴任</div>
                 </div>
               </div>
             </div>
 
             {/* Personal Info */}
             <div className="border-l-2 border-gray-200 pl-6">
-              <div className="space-y-2 text-sm">
-                <div className="flex">
-                  <span className="text-gray-500 w-20">Location:</span>
-                  <span className="text-gray-700">Osaka, Japan</span>
+              <div className="space-y-3 text-sm">
+                <div className="flex flex-col sm:flex-row">
+                  <span className="text-gray-500 w-24 font-medium">居住地：</span>
+                  <span className="text-gray-700">大阪府</span>
                 </div>
-                <div className="flex">
-                  <span className="text-gray-500 w-20">Focus:</span>
-                  <span className="text-gray-700">AI Development, Full-Stack Web Development</span>
+                <div className="flex flex-col sm:flex-row">
+                  <span className="text-gray-500 w-24 font-medium">専門分野：</span>
+                  <span className="text-gray-700">AI開発、フルスタックWeb開発</span>
                 </div>
-                <div className="flex">
-                  <span className="text-gray-500 w-20">Languages:</span>
-                  <span className="text-gray-700">Japanese (Native), English (Business)</span>
+                <div className="flex flex-col sm:flex-row">
+                  <span className="text-gray-500 w-24 font-medium">使用言語：</span>
+                  <span className="text-gray-700">日本語（ネイティブ）、英語（ビジネスレベル）</span>
                 </div>
               </div>
             </div>

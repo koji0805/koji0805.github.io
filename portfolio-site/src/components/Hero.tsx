@@ -7,14 +7,14 @@ export function Hero() {
   const [subtitleVisible, setSubtitleVisible] = useState(false)
   const [nameText, setNameText] = useState('')
   const [subtitleText, setSubtitleText] = useState('')
-  
+
   const fullName = 'KOJI FUJIWARA'
   const fullSubtitle = 'ENGINEER PORTFOLIO.'
 
   useEffect(() => {
     // デバッグ用ログを追加
     console.log('Hero component mounted')
-    
+
     // 最初のフェードイン
     const timer1 = setTimeout(() => {
       console.log('Name fade-in started')
@@ -57,15 +57,24 @@ export function Hero() {
 
   return (
     <>
-      {/* Fixed Header */}
+      {/* Fixed Header - Responsive Design */}
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
-        <nav className="max-w-6xl mx-auto px-6 py-4">
+        <nav className="max-w-6xl mx-auto px-4 py-3 sm:px-6 sm:py-4">
           <div className="flex items-center justify-center">
-            <div className="flex items-center space-x-12">
-              <a href="#profile" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">PROFILE</a>
-              <a href="#skill" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">SKILL</a>
-              <a href="#portfolio" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">PORTFOLIO</a>
-              <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors text-base font-medium">CONTACT</a>
+            {/* Mobile Navigation - Stacked or Compressed */}
+            <div className="flex items-center justify-center flex-wrap gap-3 sm:gap-6 md:gap-8 lg:space-x-12 lg:gap-0">
+              <a href="#profile" className="text-gray-600 hover:text-gray-900 transition-colors text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">
+                PROFILE
+              </a>
+              <a href="#skill" className="text-gray-600 hover:text-gray-900 transition-colors text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">
+                SKILL
+              </a>
+              <a href="#portfolio" className="text-gray-600 hover:text-gray-900 transition-colors text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">
+                PORTFOLIO
+              </a>
+              <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">
+                CONTACT
+              </a>
             </div>
           </div>
         </nav>
@@ -82,14 +91,14 @@ export function Hero() {
           <div className="absolute top-1/2 right-10 w-8 h-8 bg-blue-100 rotate-45 animate-pulse opacity-50" style={{animationDuration: '1s'}}></div>
           <div className="absolute bottom-1/3 left-1/4 w-14 h-14 border-2 border-pink-300 animate-spin opacity-30" style={{animationDuration: '6s'}}></div>
           <div className="absolute top-3/4 left-10 w-10 h-10 bg-purple-100 rotate-12 animate-bounce opacity-40" style={{animationDuration: '1.8s'}}></div>
-          
+
           {/* Fast Moving Squares */}
           <div className="absolute top-10 left-1/2 w-6 h-6 border border-blue-200 rotate-45 animate-pulse opacity-30" style={{animationDuration: '1.2s'}}></div>
           <div className="absolute bottom-10 left-1/3 w-18 h-18 border-2 border-purple-200 animate-spin opacity-25" style={{animationDuration: '4s'}}></div>
           <div className="absolute top-2/3 right-1/4 w-8 h-8 bg-pink-50 rotate-12 animate-bounce opacity-40" style={{animationDuration: '1.6s'}}></div>
-          
+
           {/* Floating Triangles with faster animations */}
-          <div 
+          <div
             className="absolute top-1/4 left-1/3 w-0 h-0 animate-pulse opacity-30"
             style={{
               borderLeft: '15px solid transparent',
@@ -98,7 +107,7 @@ export function Hero() {
               animationDuration: '1.3s'
             }}
           ></div>
-          <div 
+          <div
             className="absolute bottom-20 right-1/4 w-0 h-0 animate-bounce opacity-40"
             style={{
               borderLeft: '12px solid transparent',
@@ -107,7 +116,7 @@ export function Hero() {
               animationDuration: '1.7s'
             }}
           ></div>
-          <div 
+          <div
             className="absolute top-1/2 left-1/2 w-0 h-0 animate-spin opacity-20"
             style={{
               borderTop: '10px solid transparent',
@@ -117,7 +126,7 @@ export function Hero() {
               transform: 'translateX(-50%) translateY(-50%)'
             }}
           ></div>
-          <div 
+          <div
             className="absolute top-3/4 right-1/2 w-0 h-0 animate-pulse opacity-35"
             style={{
               borderLeft: '18px solid transparent',
@@ -126,7 +135,7 @@ export function Hero() {
               animationDuration: '2s'
             }}
           ></div>
-          <div 
+          <div
             className="absolute bottom-1/2 left-1/5 w-0 h-0 animate-bounce opacity-25"
             style={{
               borderTop: '14px solid transparent',
@@ -135,7 +144,7 @@ export function Hero() {
               animationDuration: '2.2s'
             }}
           ></div>
-          
+
           {/* Additional small moving elements */}
           {Array.from({length: 8}).map((_, i) => (
             <div
@@ -150,7 +159,7 @@ export function Hero() {
               }}
             ></div>
           ))}
-          
+
           {Array.from({length: 6}).map((_, i) => (
             <div
               key={`triangle-${i}`}
@@ -168,17 +177,17 @@ export function Hero() {
             ></div>
           ))}
         </div>
-        
-        {/* Main Content */}
-        <div className="text-center relative z-10">
-          <h1 className={`text-4xl lg:text-6xl font-bold mb-4 text-gray-900 transition-all duration-1000 ${
+
+        {/* Main Content - Responsive Text Sizing */}
+        <div className="text-center relative z-10 px-4 sm:px-6">
+          <h1 className={`text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-4 text-gray-900 transition-all duration-1000 leading-tight ${
             nameVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             {nameText}
             <span className="animate-pulse text-blue-600">|</span>
           </h1>
-          
-          <p className={`text-lg lg:text-xl font-light tracking-wide text-gray-600 transition-all duration-1000 ${
+
+          <p className={`text-sm sm:text-base md:text-lg lg:text-xl font-light tracking-wide text-gray-600 transition-all duration-1000 ${
             subtitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}>
             {subtitleText}
